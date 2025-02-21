@@ -17,8 +17,14 @@ app.use(express.json());
 app.use("/api/v1/cuisines", cuisinesRouter);
 app.use("/api/v1/foods", foodsRouter);
 
+app.use("/", (req, res) => {
+  res.send("Hello World");
+});
+
+mongoose.connect(process.env.MONGO_URI).then(() => {
+  console.log(`Database is connected`);
+});
+
 app.listen(process.env.PORT, () => {
-  mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log(`Server is running on http://localhost:${process.env.PORT}`);
-  });
+  console.log("Server is running");
 });
